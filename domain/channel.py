@@ -1,5 +1,4 @@
 from typing import Iterable, List, Optional
-from _pytest.python_api import raises
 from pydantic import BaseModel, validator
 from pycountry import countries
 
