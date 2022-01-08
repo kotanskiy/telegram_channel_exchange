@@ -20,13 +20,12 @@ class ChannelService:
         channel: Channel = await self.repo.get_by_id(id)
         if not channel:
             raise HTTPException(404, f'Channel<{id}> not found')
-        rate: float = channel.compute_rating() if channel.rates else None
-        return ChannelRepresentation(**channel.dict(), rate=rate)
+        return ChannelRepresentation(**channel.dict())
     
 
     async def get_channel_list(self, page_number: int, order_by: str = '-added_at') -> list[ChannelRepresentation]:
         channels: list[Channel] = await self.repo.get_all(page_number, PAGE_SIZE, order_by)
-        return [ChannelRepresentation(**channel.dict(exclude={'rates'}), rate=channel.compute_rating()) for channel in channels]
+        return [ChannelRepresentation(**channel.dict(exclude={'rates'})) for channel in channels]
     
 
     async def create_channel(self, data_model: ChannelCreate) -> ChannelRepresentation:

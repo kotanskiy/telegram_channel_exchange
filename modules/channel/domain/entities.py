@@ -28,7 +28,8 @@ class Channel(Entity):
         self.rates.append(rate)
 
 
-    def compute_rating(self) -> Optional[float]:
+    @property
+    def rate(self) -> Optional[float]:
         if not self.rates:
             return None
         return round(sum(self.rates) / len(self.rates), 2)
@@ -61,7 +62,6 @@ class Channel(Entity):
     def _validate_rate(self, rate: Any):
         if not isinstance(rate, int) or rate > 5 or rate < 1:
             raise ValueError('Rate must be integer from 1 to 5')
-    
 
 
 __all__ = (

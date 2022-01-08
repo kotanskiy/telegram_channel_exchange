@@ -29,12 +29,12 @@ def test_raise_put_channel_rating(valid_channel: Channel, rate):
 
 
 def test_compute_rating(valid_channel: Channel):
-    assert valid_channel.compute_rating() == 3.5
+    assert valid_channel.rate == 3.5
 
 
 def test_compute_rating_with_empty_rates(valid_channel: Channel):
     valid_channel.rates = []
-    assert valid_channel.compute_rating() is None
+    assert valid_channel.rate is None
 
 
 def test_validation_long_name(valid_channel: Channel):
