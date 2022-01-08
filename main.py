@@ -1,10 +1,12 @@
 import uvicorn
 from fastapi import FastAPI
 from config import HOST, PORT, RELOAD
-from database import database
+from db.base import database
+from modules.channel.app.routes import channels_router
 
 
-app = FastAPI()
+app = FastAPI(title='Telegram channel exchange')
+app.include_router(channels_router, prefix='/channels')
 
 
 @app.on_event('startup')
@@ -22,4 +24,4 @@ async def root():
 
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', host=HOST, port=PORT, reload=RELOAD)
+    uvicorn.run('main:app', host=HOST, port=PORT, reload=RELOAD, debug=True)

@@ -1,3 +1,4 @@
+import ormar
 from databases import Database
 from sqlalchemy import create_engine, MetaData
 
@@ -12,8 +13,14 @@ metadata = MetaData()
 db_engine = create_engine(DATABASE_URL)
 
 
+class BaseMeta(ormar.ModelMeta):
+    metadata = metadata
+    database = database
+
+
 __all__ = (
     'database',
     'metadata',
     'db_engine',
+    'BaseMeta',
 )
