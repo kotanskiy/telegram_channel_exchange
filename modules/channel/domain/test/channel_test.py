@@ -34,8 +34,7 @@ def test_compute_rating(valid_channel: Channel):
 
 def test_compute_rating_with_empty_rates(valid_channel: Channel):
     valid_channel.rates = []
-    with pytest.raises(ValueError):
-        valid_channel.compute_rating()
+    assert valid_channel.compute_rating() is None
 
 
 def test_validation_long_name(valid_channel: Channel):
